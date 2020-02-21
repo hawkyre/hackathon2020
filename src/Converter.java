@@ -1,6 +1,6 @@
 public class Converter {
-    private final static Coord upvCoord = new Coord(39.480101,-0.344469);
-    private final static Coord aytCoord = new Coord(39.470319,-0.377101);
+    private final static Coord upvCoord = new Coord(-0.344469, 39.480101);
+    private final static Coord aytCoord = new Coord(-0.377101, 39.470319);
 
     private double despX;
     private double despY;
