@@ -28,4 +28,17 @@ public class Coord {
     public String toString(){
         return "Point x: " + x + "Point y" + y;
     }
+
+    /**Static methods**/
+    public static double compX(Coord a, Coord b) {
+        return a.getX() - b.getX();
+    }
+
+    public static double compY(Coord a, Coord b) {
+        return a.getY() - b.getY();
+    }
+
+    public static double distance(Coord a, Coord b) {
+        return Math.sqrt((Math.pow(compY(a,b), 2) + Math.pow(compX(a,b), 2)));
+    }
 }
