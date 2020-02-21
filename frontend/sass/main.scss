@@ -23,15 +23,21 @@
   'layout/top-section',
   'layout/s-map',
   'layout/s-idea',
+  'layout/s-cta',
+  'layout/s-events',
+  'layout/why-grid',
   'layout/footer';
 
 // 5. Components
 @import
-  'components/button';
+  'components/button',
+  'components/event-container',
+  'components/grid';
 
 // 6. Page-specific styles
 @import
-  'pages/home';
+  'pages/home',
+  'pages/login';
 
 // 7. Themes
 @import

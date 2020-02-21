@@ -1,0 +1,39 @@
+.login-container {
+    display: inline-block;
+    @include centerAbs;
+    text-align: center;
+    font-size: 1.5rem;
+
+    background-color: $green-primary-light;
+    border-radius: 10px;
+    padding: 3rem;
+    overflow: hidden;
+}
+
+.login-input {
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid #000;
+    display: block;
+    margin: 0 auto;
+    background-color: $green-primary;
+
+    &::placeholder {
+        font-family: $font;
+        text-align: center;
+        color: #000;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+}
+
+.login-button {
+    font-family: $font;
+    padding: 1.5rem;
+    border: 2px solid $green-dark;
+    display: block;
+    margin: 0 auto;
+    background-color: $green-primary;
+}

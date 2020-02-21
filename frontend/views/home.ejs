@@ -4,28 +4,71 @@
     <div class="s-top">
         <div class="s-top__container">
             <h1 class="h-primary s-top__title">Green Map Valencia</h1>
-            <p class="s-top__desc">El juego más limpio de toda la ciudad!</p>
+            <p class="s-top__desc">¡El juego más limpio de toda la ciudad!</p>
         </div>
     </div>
 </div>
 
 <div class="main">
     <div class="s-idea">
-        <h2 class="h-sec s-idea__title">Mejorando la contaminación en Valencia, zona tras zona</h2>
+        <h2 class="h-sec">Reduciendo la contaminación en Valencia, zona tras zona</h2>
         <p class="s-idea__desc">Nuestro mapa muestra las zonas que presentan más contaminación en Valencia,
             e incita a la gente a reciclar y mejorar su ciudad.
         </p>
     </div>
     <div class="s-map">
-        <h2 class="h-sec s-map__title">Mapa de contaminación</h2>
+        <h2 class="h-sec">Mapa de contaminación</h2>
         <div class="s-map__img-container">
             <img src="<%= imgurl %>" alt="" class="s-map__image">
         </div>
     </div>
+    <div class="s-events">
+        <h2>¡Consulta los eventos más recientes por tu ciudad!</h2>
+        <div class="events">
+            <% events.forEach( (e) => { %>
+                <div class="event-container">
+                    <div class="event-container__title">
+                        <%= e.title %>
+                    </div>
+                    <div class="event-container__date">
+                        <%= e.date %>
+                    </div>
+                    <div class="event-container__signup">
+                        <button type="submit" class="btn-event">¡Apúntate!</button>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
     <div class="s-why">
         <div class="why-grid">
-            ¿Por qué es una buena idea?
+            <h2 class="h-sec">¿Qué se lleva la gente?</h2>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <p class="grid-content">
+                        Cada entrega de residuos en un punto de reciclaje le otorgará una cantidad de puntos
+                        a los participantes.
+                    </p>
+                </div>
+                <div class="grid-item">
+                    <p class="grid-content">
+                        La participación en eventos de voluntariado sobre recogida de residuos
+                        también otorgará puntos.
+                    </p>
+                </div>
+                <div class="grid-item">
+                    <p class="grid-content">
+                        Esos puntos se podrán usar en sorteos mensuales y en ránkings, pudiendo así
+                        ganar numerosos premios!
+                    </p>
+                </div>
+              </div>
         </div>
+    </div>
+    <div class="s-cta">
+        <h2>Anímate y haz de valencia una ciudad más limpia!</h2>
+        <a name="login" class="btn-cta" href="/login">Entrar</a>
+        <a name="register" class="btn-cta" href="/register">Crear cuenta</a>
     </div>
 </div>
 
