@@ -41,6 +41,7 @@ public class MapMaker {
         } catch(Exception e){e.printStackTrace();}
 */
 
+        //cPoints is then later filled in loadPointes()
         cPoints = new ArrayList<Point>();
 
         File result = new File(dMapRes);
@@ -63,12 +64,9 @@ public class MapMaker {
         Graphics2D g2 = map.createGraphics();
     }
 
-    /**Create the map**/
-    public Image getMap(){
-        return null;
-    }
     /**Private methods**/
 
+    //For every point in the canvas, find its pollution level and apply a mask on the image accordingly
     public void draw() {
         byte max = 0;
         for (int i = 0; i < X_SIZE; i++){
@@ -77,6 +75,7 @@ public class MapMaker {
                 int pollution = getCLevel(new Coord(i,j));
                 if (pollution != 0){
                 Color overlay = (pollution < 0) ? Color.RED : Color.GREEN;
+                //bytes give overflow problems when converted from ints
                 Integer pollutionB = Integer.valueOf(Math.abs(pollution*2));
                 Color finalColor = null;
                 if (pollutionB.byteValue() > max) {max = pollutionB.byteValue();}
@@ -88,10 +87,10 @@ public class MapMaker {
                 //map.setRGB(i,j,(blend(col, overlay, 0.5f)).getRGB());
             }
         }
-        System.out.println(max);
     }
 
 
+    //Mixes colors with an alpha component on color2
     public static Color mixColorsWithAlpha(Color color1, Color color2, int alpha)
     {
         float factor = alpha / 255f;
@@ -101,7 +100,7 @@ public class MapMaker {
         return new Color(red, green, blue);
     }
 
-
+    //Finds the most appropiate pollution value for a given point
     public int getCLevel(Coord p) {
         int maxCLevel = 0;
         for (int i = 0; i < cPoints.size(); i++) {
@@ -155,6 +154,7 @@ public class MapMaker {
         return new Color( a << 24 | r << 16 | g << 8 | b );
     }
 
+    //Passes points through the converter class to format them from real coordinates to pixels
     public void loadPoints(ArrayList<Point> points) {
         Converter toPixel = new Converter(new Coord(X_UPV, Y_UPV), new Coord(X_AYUN, Y_AYUN));
         for (int i = 0; i < points.size(); i++) {
