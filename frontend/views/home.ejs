@@ -27,7 +27,8 @@
         <div class="events">
             <% events.forEach( (e) => { %>
                 <div class="event-container">
-                    <div class="event-container__title">
+                    <div class="event-container__title" style="background-image: linear-gradient(73deg, #d9ffbb99, #99cc6099),
+                        url(/img/<%= e.photoName %>.jpg)">
                         <%= e.title %>
                     </div>
                     <div class="event-container__date">
