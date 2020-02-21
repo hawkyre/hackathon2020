@@ -11,12 +11,12 @@ import java.util.*;
 
 public class MapMaker {
 
-    public static final int X_SIZE = 1280, Y_SIZE = 720;
-    public static final int X_AYUN = 640, Y_AYUN = 360;
-    public static final int X_UPV = 960, Y_UPV = 540;
+    public static final int X_SIZE = 1271, Y_SIZE = 715;
+    public static final int X_AYUN = 669, Y_AYUN = 400;
+    public static final int X_UPV = 959, Y_UPV = 291;
 
-    private String dMapSource = "./maps/mapTest.jpg";
-    private String dMapRes = "./mapResult.jpg";
+    private String dMapSource = "./maps/mapa3.png";
+    private String dMapRes = "./mapResult.png";
     private BufferedImage map;
     private ArrayList<Point> cPoints;
 
@@ -42,7 +42,6 @@ public class MapMaker {
 */
 
         cPoints = new ArrayList<Point>();
-        cPoints.add(new Point(100,100, -80));
 
         File result = new File(dMapRes);
         File img = new File(dMapSource);
@@ -52,6 +51,7 @@ public class MapMaker {
             e.printStackTrace();
         }
 
+        getPoints();
         draw();
 
         try {
@@ -70,6 +70,7 @@ public class MapMaker {
     /**Private methods**/
 
     public void draw() {
+        byte max = 0;
         for (int i = 0; i < X_SIZE; i++){
             for (int j = 0; j < Y_SIZE ; j++) {
                 Color col = new Color(map.getRGB(i, j));
@@ -78,14 +79,16 @@ public class MapMaker {
                 Color overlay = (pollution < 0) ? Color.RED : Color.GREEN;
                 Integer pollutionB = Integer.valueOf(Math.abs(pollution*2));
                 Color finalColor = null;
+                if (pollutionB.byteValue() > max) {max = pollutionB.byteValue();}
                 if (pollutionB.byteValue() < 0) {
-                    finalColor = mixColorsWithAlpha(col, overlay, (byte)100);
+                    finalColor = mixColorsWithAlpha(col, overlay, (byte)126);
                 }
                 else{finalColor = mixColorsWithAlpha(col, overlay, Math.abs(pollutionB.byteValue()));}
                 map.setRGB(i,j,finalColor.getRGB());}
                 //map.setRGB(i,j,(blend(col, overlay, 0.5f)).getRGB());
             }
         }
+        System.out.println(max);
     }
 
 
@@ -151,14 +154,17 @@ public class MapMaker {
 
         return new Color( a << 24 | r << 16 | g << 8 | b );
     }
-/*  
+
     public void loadPoints(ArrayList<Point> points) {
-        Converter toPixel = new Converter(new Coord(X_AYUN, Y_AYUN), new Coord(X_UPV, Y_UPV));
+        Converter toPixel = new Converter(new Coord(X_UPV, Y_UPV), new Coord(X_AYUN, Y_AYUN));
         for (int i = 0; i < points.size(); i++) {
-            Coord pixel = toPixel.convert(points.get(i));//dentro la coordenada
-            map.setRGB(pixel.getX(), pixel.getY(), Color.BLACK.getRGB());
+            Point pixel = toPixel.convert(points.get(i));//dentro la coordenada
             cPoints.add(pixel);
         }
     }
-*/
+
+    public void getPoints() {
+        DataProc dp = new DataProc();
+        loadPoints(dp.getPoints());
+    }
 }
