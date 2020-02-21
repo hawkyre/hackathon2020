@@ -37,7 +37,7 @@ public class DataProc {
             }
 
         }
-        catch (FileNotFoundException e){System.out.println("File not Found");}
+        catch (FileNotFoundException e){System.out.println("File not Found.");}
         catch (IOException e){System.out.println("IOException");}
 
         adaptMeasures(pointList);
