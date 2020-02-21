@@ -167,4 +167,7 @@ public class MapMaker {
         DataProc dp = new DataProc();
         loadPoints(dp.getPoints());
     }
+    public BufferedImage getMapBuffer() {
+        return map;
+    }
 }
