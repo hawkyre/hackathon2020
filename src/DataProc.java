@@ -40,9 +40,7 @@ public class DataProc {
         catch (IOException e){System.out.println("IOException");}
 
         adaptMeasures(pointList);
-        for(Point point : pointList)
-            System.out.println(point.getData());
-
+        adaptMeasures(pointList);
         return pointList;
     }
 
@@ -102,7 +100,6 @@ public class DataProc {
     }
 
     public int indexCalc(ArrayList<Integer> arrayList){
-        System.out.println(arrayList.toString());
         double result = 0;
         for (Integer integer : arrayList) {
             result += integer;
@@ -111,10 +108,5 @@ public class DataProc {
 
         return (int) result;
     }
-
-    public static void main(String[] args){
-        DataProc dataProc = new DataProc();
-    }
-
 
 }
