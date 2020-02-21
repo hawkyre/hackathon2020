@@ -16,7 +16,7 @@ public class MapMaker {
     public static final int X_UPV = 959, Y_UPV = 291;
 
     private String dMapSource = "./maps/mapa3.png";
-    private String dMapRes = "./mapResult.png";
+    private String dMapRes = "../frontend/public/img/map.png";
     private BufferedImage map;
     private ArrayList<Point> cPoints;
 
