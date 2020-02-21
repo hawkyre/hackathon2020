@@ -1,0 +1,21 @@
+.s-map {
+    position: relative;
+    text-align: center;
+
+    &__title {
+        font-size: 3rem;
+        padding: 6rem 0;
+    }
+
+    &__img-container {
+        position: relative;
+    }
+
+    &__image {
+        width: 70%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        padding-bottom: 6rem;
+    }
+}

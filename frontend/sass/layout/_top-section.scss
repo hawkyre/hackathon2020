@@ -1,0 +1,21 @@
+.s-top {
+    background-color: $green-primary;
+    height: 30rem;
+    text-align: center;
+    position: relative;
+    color: $green-dark;
+    
+    &__container {
+        @include centerAbs;
+        width: 90%;
+    }
+
+    &__title {
+        font-size: 8rem;
+    }
+
+    &__desc {
+        font-size: 3rem;
+        margin-bottom: 0;
+    }
+}
