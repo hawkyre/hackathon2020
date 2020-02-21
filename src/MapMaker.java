@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 public class MapMaker {
 
     private String DMap = "./map/MapaTest.jpg";
-    private 
+    //private
 
     /**Create the map**/
     public Image getMap(){

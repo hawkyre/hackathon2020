@@ -1,23 +1,15 @@
-public class Point {
+public class Point extends Coord{
 
     private Coord coord;
     private int data; //[-100, 100]
 
-    public Point(Coord coord, int data){
-        this.coord = coord;
+    public Point(double x, double y, int data){
+        super(x, y);
         this.data = data;
-    }
-
-    public Coord getCoord() {
-        return coord;
     }
 
     public int getData() {
         return data;
-    }
-
-    public void setCoord(Coord coord) {
-        this.coord = coord;
     }
 
     public void setData(int data) {
