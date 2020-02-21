@@ -1,3 +1,31 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+
+.btn-event {
+    padding: 2rem;
+    background-color: #fff;
+    color: black;
+    font-size: 1.4rem;
+    display: block;
+    margin: 0 auto;
+    border: none;
+
+    &:not(:last-child) {
+        margin-right: 3rem;
+    }
+    border-radius: 5px;
+}
+
+.btn-cta {
+    padding: 2rem;
+    background-color: #fff;
+    color: black;
+    font-size: 1.4rem;
+    display: inline-block;
+    margin-bottom: 6rem;
+    &:not(:last-child) {
+        margin-right: 3rem;
+    }
+    border-radius: 5px;
+}
