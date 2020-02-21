@@ -13,6 +13,7 @@ const url = 'mongodb://localhost:27017/';
 // Get requests
 
 app.get('/', (req, res) => {
+
     let events = [
         {
             title: 'UPV',
@@ -30,7 +31,10 @@ app.get('/', (req, res) => {
             photoName: 'rio'
         }
     ]
-    res.render("home", {imgurl: "/img/mockup.jpg", events: events});
+
+    
+
+    res.render("home", {imgurl: "/img/map.png", events: events});
 })
 
 app.get('/login', (req, res) => {    

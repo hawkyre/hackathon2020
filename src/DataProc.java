@@ -17,6 +17,7 @@ public class DataProc {
         return points;
     }
 
+    /**Returns the point array reading the csv database**/
     public ArrayList<Point> readCSV(){
         ArrayList<Point> pointList = new ArrayList<>();
         String csvFile = "src/resources/opendata5524238908286670224.csv";
@@ -36,16 +37,15 @@ public class DataProc {
             }
 
         }
-        catch (FileNotFoundException e){System.out.println("File not Found");}
+        catch (FileNotFoundException e){System.out.println("File not Found.");}
         catch (IOException e){System.out.println("IOException");}
 
         adaptMeasures(pointList);
-        for(Point point : pointList)
-            System.out.println(point.getData());
-
+        adaptMeasures(pointList);
         return pointList;
     }
 
+    /**Adapt the pollution measures to represent them in the map**/
     private void adaptMeasures(ArrayList<Point> pointList){
         double max = 0.0;
         double min = 100.0;
@@ -101,8 +101,8 @@ public class DataProc {
         return result;
     }
 
-    public int indexCalc(ArrayList<Integer> arrayList){
-        System.out.println(arrayList.toString());
+    /**Returns the punctuation of a point given the pollution data**/
+    private int indexCalc(ArrayList<Integer> arrayList){
         double result = 0;
         for (Integer integer : arrayList) {
             result += integer;
@@ -111,10 +111,5 @@ public class DataProc {
 
         return (int) result;
     }
-
-    public static void main(String[] args){
-        DataProc dataProc = new DataProc();
-    }
-
 
 }
