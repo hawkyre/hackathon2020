@@ -1,5 +1,5 @@
 public class Point extends Coord{
-
+//HOLA
     private Coord coord;
     private int data; //[-100, 100]
 
