@@ -66,9 +66,6 @@ public class DataProc {
             newValue = -(((newValue - min) / (max - min)) * 200 - 100);
             point.setData((int)newValue);
         }
-
-
-
     }
 
     private static ArrayList<Integer> downloadCSV(String url){
