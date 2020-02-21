@@ -16,7 +16,7 @@ public class MapMaker {
     public static final int X_UPV = 960, Y_UPV = 540;
 
     private String dMapSource = "./maps/mapTest.jpg";
-    private String dMapRes = "./maps/mapResult.jpg";
+    private String dMapRes = "./mapResult.jpg";
     private BufferedImage map;
     private ArrayList<Point> cPoints;
 
@@ -41,8 +41,8 @@ public class MapMaker {
         } catch(Exception e){e.printStackTrace();}
 */
 
-        cPoints = new ArrayList<Points>();
-        cPoints.add(new Point(new Coord(100,100), 50));
+        cPoints = new ArrayList<Point>();
+        cPoints.add(new Point(100,100, -80));
 
         File result = new File(dMapRes);
         File img = new File(dMapSource);
@@ -51,11 +51,9 @@ public class MapMaker {
         } catch(IOException e){
             e.printStackTrace();
         }
-/*
-        for (int i = 0; i < 100; i++){
-            map.setRGB(100+i, 100, Color.BLACK.getRGB());
-        }
-*/
+
+        draw();
+
         try {
             ImageIO.write(map, "jpeg", result);
         } catch(IOException e){
@@ -71,28 +69,94 @@ public class MapMaker {
     }
     /**Private methods**/
 
-    public int getCLevel(Point p) {
-        int cLevel = 0;
-        for (int i = 0; i < cPoints.size(); i++) {
-            Point curr = cPoints.get(i);
-            if (Math.abs(Point.cmpX(curr, p)) < 100-Math.abs(curr.getData()) && Math.abs(Point.cmpY(curr, p)) < 100-Math.abs(curr.getData())) {
-                int dist = Point.distance(curr, p);
-                int dataAbs = Math.abs(curr.getData());
-                if (dist < dataAbs) {
-                    cLevel =  (curr.getData()) ? : ;
+    public void draw() {
+        for (int i = 0; i < X_SIZE; i++){
+            for (int j = 0; j < Y_SIZE ; j++) {
+                Color col = new Color(map.getRGB(i, j));
+                int pollution = getCLevel(new Coord(i,j));
+                if (pollution != 0){
+                Color overlay = (pollution < 0) ? Color.RED : Color.GREEN;
+                Integer pollutionB = Integer.valueOf(Math.abs(pollution*2));
+                Color finalColor = null;
+                if (pollutionB.byteValue() < 0) {
+                    finalColor = mixColorsWithAlpha(col, overlay, (byte)100);
                 }
+                else{finalColor = mixColorsWithAlpha(col, overlay, Math.abs(pollutionB.byteValue()));}
+                map.setRGB(i,j,finalColor.getRGB());}
+                //map.setRGB(i,j,(blend(col, overlay, 0.5f)).getRGB());
             }
         }
-        return cLevel;
     }
 
 
-  /*  
+    public static Color mixColorsWithAlpha(Color color1, Color color2, int alpha)
+    {
+        float factor = alpha / 255f;
+        int red = (int) (color1.getRed() * (1 - factor) + color2.getRed() * factor);
+        int green = (int) (color1.getGreen() * (1 - factor) + color2.getGreen() * factor);
+        int blue = (int) (color1.getBlue() * (1 - factor) + color2.getBlue() * factor);
+        return new Color(red, green, blue);
+    }
+
+
+    public int getCLevel(Coord p) {
+        int maxCLevel = 0;
+        for (int i = 0; i < cPoints.size(); i++) {
+            Point curr = cPoints.get(i);
+            Coord currPos = curr;
+            int dataAbs = Math.abs(curr.getData());
+            if (Math.abs(Coord.compX(currPos, p)) < dataAbs && Math.abs(Coord.compY(currPos, p)) < dataAbs) {
+                int dist = (int)(Coord.distance(currPos, p));
+                if (dist < dataAbs) {
+                    int currData = curr.getData();
+                    int currCLevel = (currData<0) ? currData + dist : currData - dist;
+                    maxCLevel = (Math.abs(currCLevel) > Math.abs(maxCLevel)) ? currCLevel : maxCLevel;
+                }
+            }
+        }
+        return maxCLevel;
+    }
+
+    public Color setAlpha(Color c, byte alpha) {
+        alpha %= 0xff;
+        int color = c.getRGB();
+
+        int mc = (alpha << 24) | 0x00ffffff;
+        int newcolor = color & mc;
+        return new Color(newcolor);
+    }
+
+    public Color blend( Color c1, Color c2, float ratio ) {
+        if ( ratio > 1f ) ratio = 1f;
+        else if ( ratio < 0f ) ratio = 0f;
+        float iRatio = 1.0f - ratio;
+
+        int i1 = c1.getRGB();
+        int i2 = c2.getRGB();
+
+        int a1 = (i1 >> 24 & 0xff);
+        int r1 = ((i1 & 0xff0000) >> 16);
+        int g1 = ((i1 & 0xff00) >> 8);
+        int b1 = (i1 & 0xff);
+
+        int a2 = (i2 >> 24 & 0xff);
+        int r2 = ((i2 & 0xff0000) >> 16);
+        int g2 = ((i2 & 0xff00) >> 8);
+        int b2 = (i2 & 0xff);
+
+        int a = (int)((a1 * iRatio) + (a2 * ratio));
+        int r = (int)((r1 * iRatio) + (r2 * ratio));
+        int g = (int)((g1 * iRatio) + (g2 * ratio));
+        int b = (int)((b1 * iRatio) + (b2 * ratio));
+
+        return new Color( a << 24 | r << 16 | g << 8 | b );
+    }
+/*  
     public void loadPoints(ArrayList<Point> points) {
         Converter toPixel = new Converter(new Coord(X_AYUN, Y_AYUN), new Coord(X_UPV, Y_UPV));
         for (int i = 0; i < points.size(); i++) {
             Coord pixel = toPixel.convert(points.get(i));//dentro la coordenada
-            map.setRGB(pixel.getX(), pixel.getY(), Color.BLACK:getRGB());
+            map.setRGB(pixel.getX(), pixel.getY(), Color.BLACK.getRGB());
             cPoints.add(pixel);
         }
     }
